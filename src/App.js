@@ -1,7 +1,13 @@
-import "./styles/App.css";
+import React from "react";
+
+import FluidDemo from "./pages/fluiddemo";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div>
+      <FluidDemo />
+    </div>
+  );
 }
 
 export default App;
