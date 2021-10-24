@@ -10,7 +10,7 @@ const containerSchema = {
 };
 
 const fluidKey = "input";
-const apiKey = "2a3d3dfb60mshcff5d7b612c90abp146cf6jsnefb8b730db97";
+const apiKey = "YOUR-JUDGE0-API-KEY";
 
 const getFluidData = async () => {
     let container;
