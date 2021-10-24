@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { TinyliciousClient } from "@fluidframework/tinylicious-client";
 import { SharedMap } from "fluid-framework";
 
+import logo from "../assets/logo.png";
+
 const client = new TinyliciousClient();
 const containerSchema = {
     initialObjects: { sharedInput: SharedMap },
@@ -137,29 +139,37 @@ function Compiler() {
 
     return (
         <>
-            <div className="row container-fluid">
-                <div className="col-6 ml-4 ">
-                    <textarea
-                        required
-                        name="code"
-                        value={input}
-                        onChange={(e) => handleInputChange(e)}
-                    ></textarea>
-                    <button
-                        type="submit"
-                        className="btn btn-danger ml-2 mr-2 "
-                        onClick={(e) => submit(e)}
-                    >
-                        <i className="fas fa-cog fa-fw"></i> Run
-                    </button>
-                </div>
-                <div className="col-5">
-                    <div>
-                        <span className="badge badge-info heading my-2 ">
-                            <i className="fas fa-exclamation fa-fw fa-md"></i>{" "}
-                            Output
-                        </span>
-                        <textarea id="output" value={output}></textarea>
+            <img
+                className="w-full h-32 object-contain bg-gray-100"
+                src={logo}
+                alt="logo"
+            />
+            <div className="px-6 bg-gray-100 flex items-center justify-center">
+                <div className="container max-w-screen-lg mx-auto">
+                    <div class="bg-light-blue rounded shadow-lg">
+                        <div className="text-white">
+                            <textarea
+                                className="p-2 bg-light-blue w-full resize-none rounded text-sm"
+                                required
+                                rows="7"
+                                name="code"
+                                value={input}
+                                onChange={(e) => handleInputChange(e)}
+                            ></textarea>
+                            <button
+                                className="bg-blue-300 justify-self-end float-right hover:bg-blue-500 text-white font-bold my-2 mr-1 px-3 rounded"
+                                type="submit"
+                                onClick={(e) => submit(e)}
+                            >
+                                Run
+                            </button>
+                        </div>
+                        <textarea
+                            className="bg-black w-full p-2 bg-opacity-40 resize-none rounded align-top align-bottom overflow-auto text-sm text-white"
+                            id="output"
+                            rows="4"
+                            value={output}
+                        ></textarea>
                     </div>
                 </div>
             </div>
