@@ -15,7 +15,7 @@ npx tinylicious
 ```
 yarn start
 ```
-
+*Note: Judge0 API key is required*
 
 ## Inspiration
 As the COVID-19 pandemic continues, more and more courses, lectures, and group projects are moved online. 
