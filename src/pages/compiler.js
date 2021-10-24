@@ -10,6 +10,7 @@ const containerSchema = {
 };
 
 const fluidKey = "input";
+const apiKey = "2a3d3dfb60mshcff5d7b612c90abp146cf6jsnefb8b730db97";
 
 const getFluidData = async () => {
     let container;
@@ -77,7 +78,7 @@ function Compiler() {
                 "content-type": "application/json",
                 "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
                 "x-rapidapi-key":
-                    "2a3d3dfb60mshcff5d7b612c90abp146cf6jsnefb8b730db97",
+                    apiKey,
             },
             body: JSON.stringify(requestBody),
         })
@@ -98,7 +99,7 @@ function Compiler() {
                 headers: {
                     "x-rapidapi-host": "judge0-ce.p.rapidapi.com",
                     "x-rapidapi-key":
-                        "2a3d3dfb60mshcff5d7b612c90abp146cf6jsnefb8b730db97",
+                        apiKey,
                     "content-type": "application/json",
                 },
             })
