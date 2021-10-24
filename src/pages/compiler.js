@@ -1,8 +1,64 @@
 import React, { useState, useEffect } from "react";
+import { TinyliciousClient } from "@fluidframework/tinylicious-client";
+import { SharedMap } from "fluid-framework";
+
+const client = new TinyliciousClient();
+const containerSchema = {
+    initialObjects: { sharedInput: SharedMap },
+};
+
+const fluidKey = "input";
+
+const getFluidData = async () => {
+    let container;
+    const containerId = window.location.hash.substring(1);
+    if (!containerId) {
+        ({ container } = await client.createContainer(containerSchema));
+        container.initialObjects.sharedInput.set(
+            fluidKey,
+            "print('Hello World')"
+        );
+        const id = await container.attach();
+        window.location.hash = id;
+    } else {
+        ({ container } = await client.getContainer(
+            containerId,
+            containerSchema
+        ));
+    }
+    return container.initialObjects;
+};
 
 function Compiler() {
-    const [input, setInput] = useState("");
-    const [output, setOutput] = useState("");
+    const [input, setInput] = useState(undefined);
+    const [output, setOutput] = useState(undefined);
+
+    const [fluidSharedObjects, setFluidSharedObjects] = useState();
+
+    useEffect(() => {
+        getFluidData().then((data) => setFluidSharedObjects(data));
+    }, []);
+
+    useEffect(() => {
+        if (fluidSharedObjects) {
+            const { sharedInput } = fluidSharedObjects;
+            const updateLocalInput = () => setInput(sharedInput.get(fluidKey));
+
+            updateLocalInput();
+
+            sharedInput.on("valueChanged", updateLocalInput);
+
+            return () => {
+                sharedInput.off("valueChanged", updateLocalInput);
+            };
+        } else {
+            return; // Do nothing because there is no Fluid SharedMap object yet.
+        }
+    }, [fluidSharedObjects]);
+
+    const handleInputChange = (e) => {
+        fluidSharedObjects.sharedInput.set(fluidKey, e.target.value);
+    };
 
     const requestBody = {
         language_id: 71,
@@ -75,10 +131,9 @@ function Compiler() {
         }
     };
 
-    const handleInputChange = (e) => {
-        console.log(e.target.value);
-        setInput(e.target.value);
-    };
+    if (!input) {
+        return <div />;
+    }
 
     return (
         <>
@@ -87,6 +142,7 @@ function Compiler() {
                     <textarea
                         required
                         name="code"
+                        value={input}
                         onChange={(e) => handleInputChange(e)}
                     ></textarea>
                     <button
