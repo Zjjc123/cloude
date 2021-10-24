@@ -5,7 +5,7 @@
 ```
 git clone https://github.com/Zjjc123/cloude.git
 cd [directory]
-npm install
+yarn
 ```
 ### Local Tinylicious Server
 ```
