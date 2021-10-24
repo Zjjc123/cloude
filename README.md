@@ -1,5 +1,22 @@
 ![logo](https://i.imgur.com/LkYPHZN.png)
 
+## Usage
+### Setting Up
+```
+git clone https://github.com/Zjjc123/cloude.git
+cd [directory]
+npm install
+```
+### Local Tinylicious Server
+```
+npx tinylicious
+```
+### Client Code
+```
+yarn start
+```
+
+
 ## Inspiration
 As the COVID-19 pandemic continues, more and more courses, lectures, and group projects are moved online. 
 
